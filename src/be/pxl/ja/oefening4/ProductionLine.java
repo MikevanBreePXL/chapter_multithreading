@@ -3,6 +3,8 @@ package be.pxl.ja.oefening4;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
 /*
 ProductionLine
 
@@ -17,7 +19,7 @@ Make sure that all operations on the production line are synchronized, so it is 
 the collection at the same time. (For this, you only need to make adjustments to the addPackage() and getPackage() methods of the ProductionLine class).
  */
 public class ProductionLine {
-    private List<Object> line = Collections.synchronizedList(new ArrayList<>());
+    private final List<Object> line = Collections.synchronizedList(new ArrayList<>());
 
     public synchronized void addPackage(Package packageToAdd) {
         line.add(packageToAdd);
@@ -29,5 +31,11 @@ public class ProductionLine {
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
+    }
+
+    public String toString() {
+        return line.stream()
+                .map(p -> p.toString())
+                .collect(Collectors.joining(", "));
     }
 }
