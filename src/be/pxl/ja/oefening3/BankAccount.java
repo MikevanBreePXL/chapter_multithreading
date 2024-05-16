@@ -1,6 +1,7 @@
 package be.pxl.ja.oefening3;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class BankAccount {
 	private int balance;
@@ -14,11 +15,31 @@ public class BankAccount {
 	}
 	
 	public void deposit(int amount, String user) {
-		// TODO
+		Thread virtualThread = Thread.startVirtualThread(() -> {
+			synchronized (this) {
+				try {
+					logger.write("User " + user + " deposited " + amount + " euros to account " + accountNumber + "\n");
+					logger.flush();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+
+				balance += amount;
+			}
+		});
 	}
 
 	public void withdraw(int amount, String user) {
-		// TODO
+		Thread virtualThread = Thread.startVirtualThread(() -> {
+			try {
+				logger.write("User " + user + " withdrew " + amount + " euros from account " + accountNumber + "\n");
+				logger.flush();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+			balance -= amount;
+		});
 	}
 	
 	public double getBalance() {
