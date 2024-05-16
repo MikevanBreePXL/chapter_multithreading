@@ -16,12 +16,6 @@ public class Main {
         producer3.start();
         producer4.start();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-
         consumer1.start();
     }
 }

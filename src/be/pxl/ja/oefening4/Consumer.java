@@ -1,5 +1,6 @@
 package be.pxl.ja.oefening4;
 
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,11 +15,11 @@ public class Consumer extends Thread {
 
     @Override
     public void run() {
-        TimerTask task = new TimerTask() {
+        TimerTask repeatedTask = new TimerTask() {
             @Override
             public void run() {
-                Package packageToTake = line.getPackage();
-                if (packageToTake != null) {
+                Optional<Package> packageToTake = line.getPackage();
+                if (packageToTake.isPresent()) {
                     System.out.println("Consumer [" + Thread.currentThread().getName() + "] getting " + packageToTake);
                 } else {
                     System.out.println("No package to take");
@@ -32,6 +33,6 @@ public class Consumer extends Thread {
         };
 
         Timer timer = new Timer();
-        timer.schedule(task, 0, (60 / packageRatePerMinute) * 1000);
+        timer.schedule(repeatedTask, 0, (60 / packageRatePerMinute) * 1000);
     }
 }
