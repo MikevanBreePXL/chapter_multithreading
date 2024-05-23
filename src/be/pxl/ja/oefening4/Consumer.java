@@ -20,9 +20,9 @@ public class Consumer extends Thread {
             public void run() {
                 Optional<Package> packageToTake = line.getPackage();
                 if (packageToTake.isPresent()) {
-                    System.out.println("Consumer [" + Thread.currentThread().getName() + "] getting " + packageToTake);
+                    System.out.println("Consumer [" + Thread.currentThread().getName() + "] is getting package: " + packageToTake.get());
                 } else {
-                    System.out.println("No package to take");
+                    System.out.println("No package to take!");
                 }
                 try {
                     Thread.sleep(1000);

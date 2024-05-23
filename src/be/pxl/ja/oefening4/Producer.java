@@ -18,10 +18,10 @@ public class Producer extends Thread {
             @Override
             public void run() {
                 Package packageToProduce = new Package();
+                System.out.println("Producer [" + Thread.currentThread().getName() + "] produced a package: " + packageToProduce);
                 line.addPackage(packageToProduce);
                 try {
                     Thread.sleep(1000);
-                    System.out.println("Producer [" + Thread.currentThread().getName() + "] produced a package: " + packageToProduce);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

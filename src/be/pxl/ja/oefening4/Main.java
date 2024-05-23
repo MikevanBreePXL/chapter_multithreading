@@ -10,12 +10,14 @@ public class Main {
         Producer producer4 = new Producer(7, line);
 
         Consumer consumer1 = new Consumer(30, line);
+        Consumer consumer2 = new Consumer(25, line);
 
-        producer1.start();
-        producer2.start();
-        producer3.start();
-        producer4.start();
+            producer1.start();
+            producer2.start();
+            producer3.start();
+            producer4.start();
 
-        consumer1.start();
+            consumer1.start();
+            consumer2.start();
     }
 }
